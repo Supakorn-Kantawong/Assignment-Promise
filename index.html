@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"> </script>
+    <title>Document</title>
+</head>
+<style>
+    img{
+        border-radius: 40%
+    }
+    h1{
+        font-size:15px
+    }
+    p{
+        font-size:12px
+    }
+</style>
+<body Onload="await()">
+    <div id="show">
+
+    </div>
+    <script>
+        function promise(){
+            axios.get('https://reqres.in/api/users/5').then(res=>{
+                console.log('result',res.data)
+                document.getElementById('show').innerHTML = `<img src="${res.data.data.avatar}"> 
+                <h1>${res.data.data.first_name}${res.data.data.last_name} </h1>
+                <p>${res.data.data.email}</p>`
+            }).catch(error=>{
+                console.log('error',error)
+            })
+        }
+
+        async function await(){
+            try {
+                let axios1 = await axios.get('https://reqres.in/api/users/5')
+                console.log('result',axios1.data)
+                document.getElementById('show').innerHTML = `<img src="${axios1.data.data.avatar}"> 
+                <h1>${axios1.data.data.first_name}${axios1.data.data.last_name} </h1>
+                <p>${axios1.data.data.email}</p>`
+                
+            }catch (error) {
+                console.log('error',error)
+            }
+        }
+    </script>
+</body>
+</html>
